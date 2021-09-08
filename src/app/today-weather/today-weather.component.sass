@@ -1,0 +1,38 @@
+:host
+    display: inline-block
+    padding: 10px
+
+h2
+    text-align: center
+    font-size: 40px
+
+.white-text
+    color: white
+    margin: 5px
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black
+
+.current-temp
+    font-size: 2rem
+
+.feels-like
+    font-size: 1.3rem
+
+.big-icon 
+    font-size: 15rem
+
+.icon-stack
+    position: relative
+    display: inline-block
+
+    .icon-center-text
+        text-align: center
+        position: absolute
+        left: 0px
+        height: 100%
+        width: 100%
+        &.rain, &.smog
+            top: 50px
+            font-weight: bold
+        &.cloud, &.sun, &.bolt, &.snow, &.cloud-sun
+            top: 90px
+            font-weight: bold

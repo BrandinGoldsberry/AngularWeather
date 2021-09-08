@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  OWAppId: '803b735639c6295f8775f2a957a49ef2'
 };
 
 /*

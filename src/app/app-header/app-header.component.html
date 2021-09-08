@@ -1,0 +1,12 @@
+<div class="flex-row full-width">
+    <h1>
+        Angular Weather
+    </h1>
+    <div class="search-block">
+        <input type="text" name="" id="city-input" #newCityInput>
+        <button (click)="newCity(newCityInput.value);">
+            <fa-icon [icon]="faSearch" class="fa-fw"></fa-icon>
+        </button>
+    </div>
+    <slider rightDisplay="C°" leftDisplay="F°" (sliderToggle)="unitToggleHandler($event)"></slider>
+</div>
