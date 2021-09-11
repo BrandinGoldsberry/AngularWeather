@@ -1,10 +1,38 @@
+@mixin gridColumnArgs($beginning, $end)
+    grid-column-start: $beginning
+    grid-column-end: $end
+
+@mixin gridRowArgs($beginning, $end)
+    grid-row-start: $beginning
+    grid-row-end: $end
+
+@mixin gridArgs($colStart, $colEnd, $rowStart, $rowEnd)
+    @include gridColumnArgs($colStart, $colEnd)
+    @include gridRowArgs($rowStart, $rowEnd)
+
 :host
-    display: inline-block
+    display: inline-grid
     padding: 10px
+    grid-template-columns: [left] 120px [center] 120px [right] 120px [end]
+    grid-template-rows: [top] 15% [second] 45% [third] 45% [fourth] 25% [end]
 
 h2
     text-align: center
     font-size: 40px
+    @include gridArgs(left, end, top, second)
+
+.extremes
+    text-align: center
+    font-size: 2rem
+    @include gridColumnArgs(right, end)
+    &.low
+        align-self: start
+        margin-top: 3vh
+        @include gridRowArgs(third, fourth)
+    &.high
+        align-self: end
+        margin-bottom: 3vh
+        @include gridRowArgs(second, third)
 
 .white-text
     color: white
@@ -22,8 +50,9 @@ h2
 
 .icon-stack
     position: relative
-    display: inline-block
-
+    // display: inline-block
+    @include gridArgs(left, right, second, fourth)
+    align-self: center
     .icon-center-text
         text-align: center
         position: absolute

@@ -1,5 +1,6 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { faCloud, faCloudSun, faSun, faCloudRain, faBolt, faSnowflake, faSmog, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { Weather } from '../weather';
 
 @Component({
   selector: 'today-weather',
@@ -7,26 +8,34 @@ import { faCloud, faCloudSun, faSun, faCloudRain, faBolt, faSnowflake, faSmog, I
   styleUrls: ['./today-weather.component.sass']
 })
 export class TodayWeatherComponent implements OnChanges {
-  @Input() currentWeather: any;
+  @Input() currentWeather!: Weather;
   @Input() tempUnit: string = 'F';
+  @ViewChild("iconElem") private iconElem!: ElementRef<HTMLElement>;
+
   curTemp: string = "";
   curFeel: string = "";
   curIcon: IconDefinition = faCloud;
   curIconClass: string = "cloud";
   curIconColor: any = {color: "gray"};
-  highTemp: number = 0;
-  lowTemp: number = 0;
+  curIconScaleFix: string = "";
+  curIconTranslateFix: string = "";
+  highTemp: number = Math.max();
+  lowTemp: number = Math.min();
 
   constructor() { 
   }
   
   ngOnChanges(): void {
-    console.log(this.currentWeather);
+    let icon: string = this.currentWeather.current.weather[0].icon;
     this.curTemp = Math.round(this.currentWeather.current.temp).toString();
-    this.curIcon = this.iconIdToFAIcon(this.currentWeather.current.weather[0].icon);
+    this.curIcon = this.iconIdToFAIcon(icon);
     this.curFeel = Math.round(this.currentWeather.current.feels_like).toString();
-    this.curIconClass = this.iconIdToFAClass(this.currentWeather.current.weather[0].icon);
-    this.curIconColor = this.iconIdToFAColor(this.currentWeather.current.weather[0].icon);
+    this.curIconClass = this.iconIdToFAClass(icon);
+    this.curIconColor = this.iconIdToFAColor(icon);
+    this.curIconTranslateFix = this.iconIdToScaleFix(icon) + " " + this.iconIdToTranslateFix(icon);
+    this.highTemp = 0;
+    this.lowTemp = Math.min();
+    this.initTempExtremes();
   }
 
   iconIdToFAIcon(id: string): IconDefinition {
@@ -83,6 +92,60 @@ export class TodayWeatherComponent implements OnChanges {
     }
   }
 
+  iconIdToScaleFix(id: string): string {
+    let reg = /\d\d/gm;
+    let regRes = reg.exec(id);
+    
+    if(regRes !== null) {
+      switch (regRes[0]) {
+        case "01":
+          return "";
+        case "02":
+          return "shrink-3";
+        case "09":
+        case "10":
+          return "shrink-3";
+        case "11":
+          return "";
+        case "13":
+          return "";
+        case "50":
+          return "shrink-3";
+        default:
+          return "shrink-3";
+      }
+    } else {
+      return "shrink-3";
+    }
+  }
+
+  iconIdToTranslateFix(id: string): string {
+    let reg = /\d\d/gm;
+    let regRes = reg.exec(id);
+    
+    if(regRes !== null) {
+      switch (regRes[0]) {
+        case "01":
+          return "";
+        case "02":
+          return "left-2";
+        case "09":
+        case "10":
+          return "";
+        case "11":
+          return "right-4 down-1";
+        case "13":
+          return "right-1";
+        case "50":
+          return "left-2";
+        default:
+          return "left-2";
+      }
+    } else {
+      return "";
+    }
+  }
+
   iconIdToFAColor(id: string): Object {
     let reg = /\d\d/gm;
     let regRes = reg.exec(id);
@@ -95,9 +158,9 @@ export class TodayWeatherComponent implements OnChanges {
           return {color: "gray"};
         case "09":
         case "10":
-          return {color: "blue"};
+          return {color: "#519df5"};
         case "11":
-          return {color: "blue"};
+          return {color: "#519df5"};
         case "13":
           return {color: "lightblue"};
         case "50":
@@ -110,7 +173,14 @@ export class TodayWeatherComponent implements OnChanges {
     }
   }
 
-  getTempExtremes() {
-    this.currentWeather.hourly
+  initTempExtremes() {
+    let hours = this.currentWeather.hourly;
+    
+    for (let index = 0; index < hours.length; index++) {
+      const element = hours[index];
+      
+      this.highTemp = Math.round(element.temp > this.highTemp ? element.temp : this.highTemp);
+      this.lowTemp = Math.round(element.temp < this.lowTemp ? element.temp : this.lowTemp);
+    }
   }
 }
