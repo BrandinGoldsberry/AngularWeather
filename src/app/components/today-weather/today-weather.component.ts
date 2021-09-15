@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { faCloud, faCloudSun, faSun, faCloudRain, faBolt, faSnowflake, faSmog, IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { Weather } from '../weather';
+import { faCloud, faCloudSun, faSun, faCloudRain, faBolt, faSnowflake, faSmog, faTint, faWind, faArrowDown, faArrowUp, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { Weather } from '../../models/weather';
 
 @Component({
   selector: 'today-weather',
@@ -14,13 +14,20 @@ export class TodayWeatherComponent implements OnChanges {
 
   curTemp: string = "";
   curFeel: string = "";
-  curIcon: IconDefinition = faCloud;
+  curIcon: string = "03d";
   curIconClass: string = "cloud";
   curIconColor: any = {color: "gray"};
   curIconScaleFix: string = "";
   curIconTranslateFix: string = "";
   highTemp: number = Math.max();
   lowTemp: number = Math.min();
+  windSpeed: number = 0;
+  windDirection: string = "N";
+  humidity: number = 0;
+  faWind = faWind;
+  faTint = faTint;
+  faArrowDown = faArrowDown;
+  faArrowUp = faArrowUp;
 
   constructor() { 
   }
@@ -28,40 +35,51 @@ export class TodayWeatherComponent implements OnChanges {
   ngOnChanges(): void {
     let icon: string = this.currentWeather.current.weather[0].icon;
     this.curTemp = Math.round(this.currentWeather.current.temp).toString();
-    this.curIcon = this.iconIdToFAIcon(icon);
+    this.curIcon = icon;
     this.curFeel = Math.round(this.currentWeather.current.feels_like).toString();
     this.curIconClass = this.iconIdToFAClass(icon);
     this.curIconColor = this.iconIdToFAColor(icon);
     this.curIconTranslateFix = this.iconIdToScaleFix(icon) + " " + this.iconIdToTranslateFix(icon);
     this.highTemp = 0;
     this.lowTemp = Math.min();
+    this.windSpeed = Math.round(this.currentWeather.current.wind_speed);
+    this.windDirection = this.degreesToCardinalDirection(this.currentWeather.current.wind_deg);
+    this.humidity = this.currentWeather.current.humidity;
     this.initTempExtremes();
   }
 
-  iconIdToFAIcon(id: string): IconDefinition {
-    let reg = /\d\d/gm;
-    let regRes = reg.exec(id);
+  degreesToCardinalDirection(degree: number): string {
+    let sector: number = Math.floor(degree / 22.5);
+    console.log(sector);
     
-    if(regRes !== null) {
-      switch (regRes[0]) {
-        case "01":
-          return faSun;
-        case "02":
-          return faCloudSun;
-        case "09":
-        case "10":
-          return faCloudRain;
-        case "11":
-          return faBolt;
-        case "13":
-          return faSnowflake;
-        case "50":
-          return faSmog;
-        default:
-          return faCloud;
-      }
-    } else {
-      return faCloud;
+    switch (sector) {
+      case 15:
+      case 16:
+      case 0:
+        return "N";
+      case 1:
+      case 2:
+        return "NW";
+      case 3:
+      case 4:
+        return "W";
+      case 5:
+      case 6:
+        return "SW";
+      case 7:
+      case 8:
+        return "S";
+      case 9:
+      case 10:
+        return "SE";
+      case 11:
+      case 12:
+        return "E";
+      case 13:
+      case 14:
+        return "NE";
+      default:
+        return "N";
     }
   }
 
@@ -99,9 +117,9 @@ export class TodayWeatherComponent implements OnChanges {
     if(regRes !== null) {
       switch (regRes[0]) {
         case "01":
-          return "";
+          return "grow-3";
         case "02":
-          return "shrink-3";
+          return "";
         case "09":
         case "10":
           return "shrink-3";
@@ -112,10 +130,10 @@ export class TodayWeatherComponent implements OnChanges {
         case "50":
           return "shrink-3";
         default:
-          return "shrink-3";
+          return "shrink-1";
       }
     } else {
-      return "shrink-3";
+      return "shrink-1";
     }
   }
 
@@ -126,9 +144,9 @@ export class TodayWeatherComponent implements OnChanges {
     if(regRes !== null) {
       switch (regRes[0]) {
         case "01":
-          return "";
+          return "right-2";
         case "02":
-          return "left-2";
+          return "";
         case "09":
         case "10":
           return "";
@@ -139,7 +157,7 @@ export class TodayWeatherComponent implements OnChanges {
         case "50":
           return "left-2";
         default:
-          return "left-2";
+          return "";
       }
     } else {
       return "";

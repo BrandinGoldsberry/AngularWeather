@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { UserInputService } from '../user-input.service';
+import { UserInputService } from '../../services/user-input.service';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { SliderEvent } from '../slider/sliderEvent';
 import { SlideState } from '../slider/slideState';

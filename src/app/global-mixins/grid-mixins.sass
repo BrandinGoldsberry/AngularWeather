@@ -1,0 +1,11 @@
+@mixin gridColumnArgs($beginning, $end)
+    grid-column-start: $beginning
+    grid-column-end: $end
+
+@mixin gridRowArgs($beginning, $end)
+    grid-row-start: $beginning
+    grid-row-end: $end
+
+@mixin gridArgs($colStart, $colEnd, $rowStart, $rowEnd)
+    @include gridColumnArgs($colStart, $colEnd)
+    @include gridRowArgs($rowStart, $rowEnd)

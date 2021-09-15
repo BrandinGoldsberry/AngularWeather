@@ -5,8 +5,8 @@ import { UserInputService } from './user-input.service';
 import { WeatherDataService } from './weather-data.service';
 
 //Models
-import { City } from './city';
-import { Weather } from './weather';
+import { City } from './models/city';
+import { Weather } from './models/weather';
 
 @Component({
   selector: 'app-root',

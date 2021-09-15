@@ -2,4 +2,5 @@
 <p>{{cityName}}</p>
 <hr>
 <today-weather [tempUnit]="tempUnit" *ngIf="weatherData.current" [currentWeather]="weatherData"></today-weather>
+<weekly-forecast [days]="weatherData.daily"></weekly-forecast>
 <router-outlet></router-outlet>

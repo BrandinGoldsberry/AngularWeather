@@ -1,0 +1,10 @@
+@mixin tooltip($content, $color, $size, $offset: 20px)
+    position: relative
+    &:hover::before
+        content: $content
+        position: absolute
+        background-color: $color
+        font-size: $size
+        border: 2px solid white
+        border-radius: 5px
+        bottom: $offset

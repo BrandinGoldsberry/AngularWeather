@@ -1,0 +1,16 @@
+<h2>Today</h2>
+<div class="icon-stack">
+    <fa-icon #iconElem [icon]="curIcon | weatherIcon" [transform]="curIconTranslateFix" [styles]="curIconColor" class="fa-fw big-icon"></fa-icon>
+    <div [class]="'icon-center-text ' + curIconClass">
+        <p class="white-text current-temp">{{curTemp}} °{{tempUnit}}</p>
+        <p class="white-text feels-like">Feels {{curTemp}} °{{tempUnit}}</p>
+    </div>
+</div>
+<div class="extremes high"><fa-icon [icon]="faArrowUp"></fa-icon> {{highTemp}} °{{tempUnit}}</div>
+<div class="extremes low"><fa-icon [icon]="faArrowDown"></fa-icon> {{lowTemp}} °{{tempUnit}}</div>
+<div class="wind-speed">
+    <div tooltip="Wind Speed"><fa-icon [icon]="faWind"></fa-icon> {{windSpeed}}{{tempUnit == "F" ? "mph" : "km/h"}} {{windDirection}}</div>
+</div>
+<div class="humidity">
+    <div tooltip="Wind Speed"><fa-icon [icon]="faTint"></fa-icon> {{humidity}}%</div>
+</div>
