@@ -1,8 +1,8 @@
 //Injectables/Dependencies
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { UserInputService } from './user-input.service';
-import { WeatherDataService } from './weather-data.service';
+import { UserInputService } from './services/user-input.service';
+import { WeatherDataService } from './services/weather-data.service';
 
 //Models
 import { City } from './models/city';
