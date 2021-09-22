@@ -38,7 +38,6 @@ export class TodayWeatherComponent implements OnChanges {
     this.curIcon = icon;
     this.curFeel = Math.round(this.currentWeather.current.feels_like).toString();
     this.curIconClass = this.iconIdToFAClass(icon);
-    this.curIconColor = this.iconIdToFAColor(icon);
     this.curIconTranslateFix = this.iconIdToScaleFix(icon) + " " + this.iconIdToTranslateFix(icon);
     this.highTemp = 0;
     this.lowTemp = Math.min();
@@ -161,33 +160,6 @@ export class TodayWeatherComponent implements OnChanges {
       }
     } else {
       return "";
-    }
-  }
-
-  iconIdToFAColor(id: string): Object {
-    let reg = /\d\d/gm;
-    let regRes = reg.exec(id);
-    
-    if(regRes !== null) {
-      switch (regRes[0]) {
-        case "01":
-          return {color: "orange"};
-        case "02":
-          return {color: "gray"};
-        case "09":
-        case "10":
-          return {color: "#519df5"};
-        case "11":
-          return {color: "#519df5"};
-        case "13":
-          return {color: "lightblue"};
-        case "50":
-          return {color: "darkgray"};
-        default:
-          return {color: "gray"};
-      }
-    } else {
-      return {color: "gray"};
     }
   }
 

@@ -1,6 +1,6 @@
 <h2>Today</h2>
 <div class="icon-stack">
-    <fa-icon #iconElem [icon]="curIcon | weatherIcon" [transform]="curIconTranslateFix" [styles]="curIconColor" class="fa-fw big-icon"></fa-icon>
+    <fa-icon #iconElem [icon]="curIcon | weatherIcon" [transform]="curIconTranslateFix" [styles]="curIcon | weatherIconColor" class="fa-fw big-icon"></fa-icon>
     <div [class]="'icon-center-text ' + curIconClass">
         <p class="white-text current-temp">{{curTemp}} °{{tempUnit}}</p>
         <p class="white-text feels-like">Feels {{curTemp}} °{{tempUnit}}</p>

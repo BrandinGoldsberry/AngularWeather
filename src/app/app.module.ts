@@ -12,6 +12,7 @@ import { FutureDayComponent } from './components/future-day/future-day.component
 import { WeeklyForecastComponent } from './components/weekly-forecast/weekly-forecast.component';
 import { WeatherIconPipe } from './pipes/weather-icon.pipe';
 import { NumberRoundPipe } from './pipes/number-round.pipe';
+import { WeatherIconColorPipe } from './pipes/weather-icon-color.pipe';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { NumberRoundPipe } from './pipes/number-round.pipe';
     WeeklyForecastComponent,
     WeatherIconPipe,
     NumberRoundPipe,
+    WeatherIconColorPipe,
   ],
   imports: [
     BrowserModule,

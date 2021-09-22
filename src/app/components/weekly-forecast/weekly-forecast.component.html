@@ -1,1 +1,7 @@
-<future-day [data]="day" [index]=i *ngFor="let day of futureDays; index as i;"></future-day>
+<h2>Weekly Forecast</h2>
+<div class="flex-row">
+    <div *ngFor="let day of futureDays; index as i;" class="day-section">
+        <future-day [data]="day" [index]=i></future-day>
+        <div *ngIf="i !== futureDays.length - 1" class="vertical-rule"></div>
+    </div>
+</div>
