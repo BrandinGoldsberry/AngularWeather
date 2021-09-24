@@ -5,4 +5,5 @@
     <today-weather [tempUnit]="tempUnit" *ngIf="weatherData.current" [currentWeather]="weatherData"></today-weather>
     <weekly-forecast [days]="weatherData.daily"></weekly-forecast>
 </div>
+<loading></loading>
 <router-outlet></router-outlet>

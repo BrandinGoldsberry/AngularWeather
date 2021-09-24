@@ -1,4 +1,4 @@
 <h3 class="week-day">{{dayOfWeek}}</h3>
-<fa-icon class="weather-icon" transform="grow-10" [icon]="data.weather[0].icon | weatherIcon"></fa-icon>
-<div class="high">{{data.temp.max | RoundNumber}}</div>
-<div class="low">{{data.temp.min | RoundNumber}}</div>
+<fa-icon class="weather-icon" transform="grow-20" [styles]="data.weather[0].icon | weatherIconColor" [icon]="data.weather[0].icon | weatherIcon"></fa-icon>
+<div class="high">{{data.temp.max | RoundNumber}} °{{tempUnit}}</div>
+<div class="low">{{data.temp.min | RoundNumber}} °{{tempUnit}}</div>
