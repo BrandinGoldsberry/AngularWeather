@@ -1,9 +1,8 @@
 <app-header></app-header>
-<p>{{cityName}}</p>
-<hr>
+<p class="city-name">{{cityName}}</p>
 <div class="content-center">
     <today-weather [tempUnit]="tempUnit" *ngIf="weatherData.current" [currentWeather]="weatherData"></today-weather>
-    <weekly-forecast [days]="weatherData.daily"></weekly-forecast>
+    <weekly-forecast *ngIf="weatherData.daily" [days]="weatherData.daily"></weekly-forecast>
+    <loading *ngIf="!weatherData.daily"></loading>
 </div>
-<loading></loading>
 <router-outlet></router-outlet>

@@ -34,6 +34,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.cityNameSubscription = this.userInputSub.currentCity.subscribe(message => { 
       this.cityName = message
+      this.weatherData = <Weather>{};
       this.getCityInfo();
     });
     this.unitMeasurementSubscription = this.userInputSub.currentMeasurement.subscribe(message => {

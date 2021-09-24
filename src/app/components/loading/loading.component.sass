@@ -1,11 +1,33 @@
 :host
-    display: inline-block
-    position: absolute
-    div
-        display: inline-block
+    display: inline-flex
 
-.circle
-    width: 1vh
-    height: 1vh
-    border-width: 50%
-    background-color: black
+.box
+    background-color: #eee
+    margin: 5px
+    border-radius: 10px
+    animation: pulse 1s infinite forwards
+
+.large
+    width: 400px
+    height: 400px
+
+.small
+    width: 150px
+    height: 400px
+
+@keyframes pulse
+  0%
+    background: #eee
+    transform: scale(1)
+  
+  25%
+    background: darken(#eee, 10%)
+    transform: scale(1.015)
+  
+  50%
+    background: #eee
+    transform: scale(1)
+
+@for $var from 1 through 8
+    .box:nth-child(#{$var})
+        animation-delay: #{$var/8}s
