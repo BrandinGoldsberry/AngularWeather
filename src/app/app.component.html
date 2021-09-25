@@ -1,4 +1,4 @@
-<app-header></app-header>
+<app-header [curIcon]="curIcon"></app-header>
 <p class="city-name">{{cityName}}</p>
 <div class="content-center">
     <today-weather [tempUnit]="tempUnit" *ngIf="weatherData.current" [currentWeather]="weatherData"></today-weather>

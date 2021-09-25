@@ -21,8 +21,6 @@ export class SliderComponent {
   }
 
   toggleSlide() {
-    console.log("Slide toggled");
-    
     this.state = this.state === SlideState.Left ? SlideState.Right : SlideState.Left;
     let newEvent: SliderEvent = {
       state: this.state

@@ -1,20 +1,23 @@
 @import '../../global-mixins/grid-mixins'
 @import '../../global-mixins/pseudo-mixins'
+$bgColor: var(--background-color)
 
 :host
     display: inline-grid
     padding: 10px
     grid-template-columns: [left] 150px [center] 150px [right] 170px [end]
     grid-template-rows: [top] 70px [second] 20% [third] 20% [fourth] 20% [fifth] 20% [end]
+    color: var(--font-color)
 
 h2
     text-align: center
     font-size: 60px
     @include gridArgs(left, end, top, second)
+    color: var(--font-color)
 
 .wind-speed
     @include gridArgs(right, end, fourth, fifth)
-    @include tooltip('Wind Speed', white, 12px, 30px)
+    @include tooltip('Wind Speed', var(--background-color), 12px, 30px)
     text-align: left
     align-self: center
     font-size: 30px
@@ -22,7 +25,7 @@ h2
         color: #519df5
 .humidity
     @include gridArgs(right, end, fifth, end)
-    @include tooltip('Humidity', white, 12px, 30px)
+    @include tooltip('Humidity', var(--background-color), 12px, 30px)
     text-align: left
     align-self: center
     font-size: 30px
@@ -36,10 +39,10 @@ h2
     @include gridColumnArgs(right, end)
     &.low
         @include gridRowArgs(third, fourth)
-        @include tooltip("Today's Low", white, 12px, 30px)
+        @include tooltip("Today's Low", var(--background-color), 12px, 30px)
     &.high
         @include gridRowArgs(second, third)
-        @include tooltip("Today's High", white, 12px, 30px)
+        @include tooltip("Today's High", var(--background-color), 12px, 30px)
 
 .white-text
     color: white

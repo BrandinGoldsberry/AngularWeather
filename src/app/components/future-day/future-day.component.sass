@@ -15,7 +15,11 @@ h3
 
 .low
     font-size: 25px
-    color: #666
+    @if var(--background-color) == #000
+        color: #ccc
+    @else 
+        color: #666
+         
 
 .weather-icon
     margin: 20px 0px

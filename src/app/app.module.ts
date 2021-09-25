@@ -14,6 +14,7 @@ import { WeatherIconPipe } from './pipes/weather-icon.pipe';
 import { NumberRoundPipe } from './pipes/number-round.pipe';
 import { WeatherIconColorPipe } from './pipes/weather-icon-color.pipe';
 import { LoadingComponent } from './components/loading/loading.component';
+import { ContextColorPipe } from './pipes/context-color.pipe';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { LoadingComponent } from './components/loading/loading.component';
     NumberRoundPipe,
     WeatherIconColorPipe,
     LoadingComponent,
+    ContextColorPipe,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +36,7 @@ import { LoadingComponent } from './components/loading/loading.component';
     FontAwesomeModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [ContextColorPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

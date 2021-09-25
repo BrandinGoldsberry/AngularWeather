@@ -12,7 +12,6 @@ export class WeeklyForecastComponent implements OnChanges {
   constructor() { }
 
   ngOnChanges(): void {
-    console.log(this.futureDays);
     this.futureDays.shift();
   }
 

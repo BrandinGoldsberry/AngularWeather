@@ -49,7 +49,6 @@ export class TodayWeatherComponent implements OnChanges {
 
   degreesToCardinalDirection(degree: number): string {
     let sector: number = Math.floor(degree / 22.5);
-    console.log(sector);
     
     switch (sector) {
       case 15:

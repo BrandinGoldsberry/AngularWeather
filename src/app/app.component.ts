@@ -1,5 +1,5 @@
 //Injectables/Dependencies
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostBinding, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { UserInputService } from './services/user-input.service';
 import { WeatherDataService } from './services/weather-data.service';
@@ -24,6 +24,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   temp: Number = 0;
 
+  curIcon: string = "01d";
+
   cityNameSubscription: Subscription = Subscription.EMPTY;
   unitMeasurementSubscription: Subscription = Subscription.EMPTY;
 
@@ -33,8 +35,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.cityNameSubscription = this.userInputSub.currentCity.subscribe(message => { 
-      this.cityName = message
+      this.cityName = message;      
       this.weatherData = <Weather>{};
+      this.cityData = <City>{};
       this.getCityInfo();
     });
     this.unitMeasurementSubscription = this.userInputSub.currentMeasurement.subscribe(message => {
@@ -58,14 +61,14 @@ export class AppComponent implements OnInit, OnDestroy {
 
   getWeatherInfo() {
     this.cityDataSub.getCityWeatherFull(this.cityData.coord.lon, this.cityData.coord.lat, this.unitSystem).subscribe(wData => {
-      console.log(wData);
-      
       this.weatherData = wData;
       this.temp = Math.round(wData.current.temp - 273.15);
+      this.curIcon = this.weatherData.current.weather[0].icon
     });
   }
 
   ngOnDestroy() {
     this.cityNameSubscription.unsubscribe();
+    this.unitMeasurementSubscription.unsubscribe();
   }
 }

@@ -21,7 +21,6 @@ export class WeatherDataService {
   }
 
   getCityWeatherFull(lon: Number, lat: Number, measurementUnits: string): Observable<Weather> {
-    console.log("getting weather");
     return this.http.get<Weather>(
       `http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&units=${measurementUnits}&lon=${lon}&appid=${environment.OWAppId}`
     );
